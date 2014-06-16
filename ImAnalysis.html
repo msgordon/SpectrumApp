@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html manifest="spectrum.manifest">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" > 
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <link rel="apple-touch-icon" href="ImAnalysis/SpectrumIcon.png" />
+
+  <link rel="apple-touch-startup-image" href="ImAnalysis/SpectrumSplash.png" />
+
+  <link href="ImAnalysis/css/ImAnalysis.css" rel="stylesheet" type="text/css">
+  <link href="./assets/jquery-ui.min.css" rel="stylesheet" type="text/css">
+  <link href="ImAnalysis/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen">
+
+  <script type="text/javascript" src="ImAnalysis/js/median.js"></script>
+  <script type="text/javascript" src="assets/jquery.min.js"></script>
+  <script language="javascript" type="text/javascript" src="./assets/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="ImAnalysis/js/load-image.js"></script>
+  <script type="text/javascript" src="ImAnalysis/js/load-image-ios.js"></script>
+  <script type="text/javascript" src="ImAnalysis/js/load-image-orientation.js"></script>
+  <script type="text/javascript" src="ImAnalysis/js/load-image-meta.js"></script>
+  <script type="text/javascript" src="ImAnalysis/js/load-image-exif.js"></script>
+  <script type="text/javascript" src="ImAnalysis/js/load-image-exif-map.js"></script>
+  <script type="text/javascript" src="ImAnalysis/js/jquery.Jcrop.js"></script>
+  <script type="text/javascript" src="ImAnalysis/js/demo.js"></script>
+  <script language="javascript" type="text/javascript" src="./assets/flot/jquery.flot.min.js"></script>
+  <script language="javascript" type="text/javascript" src="./assets/flot/jquery.flot.resize.js"></script>
+  <script language="javascript" type="text/javascript" src="./assets/flot/jquery.flot.axislabels.js"></script>
+  
+  <script type='text/javascript' src="ImAnalysis/js/jquery.fancybox.pack.js"></script>    
+  <link rel="stylesheet" type="text/css" href="ImAnalysis/css/jquery.fancybox.css">
+
+  <title>Spectrum Generator</title>
+
+</head>
+
+<body>
+  <div id="wrap">
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Spectrum Generator</h1>
+      <p class="lead">Compute one-dimensional cut across images and display spectrum.</p>
+      </div>
+
+    <div class="row">
+      <form role="form">
+	<div class="form-group col-xs-12 col-sm-6 col-md-8">
+	  <label for="InputFile">Select an image file</label>
+	  <input type="file" id="file-input" style="display:none">
+	  <div class="input-append">
+	    <a class="btn btn-default" onclick="$('input[id=file-input]').click();">Browse</a>
+	  </div>
+
+	  <p class="help-block">Or <strong>drag &amp; drop</strong> an image file onto this webpage.</p>
+	</div>
+      </form>
+    </div>
+    
+    <div class="row">
+      <form role="form">
+	<div class="form-group col-xs-12 col-sm-6 col-md-8">
+	  <p id="actions" style="display:none;">
+	    <button type="button" class="btn btn-primary" id="edit">Edit</button>
+	    <button type="button" class="btn btn-primary" id="crop">Crop</button>
+	    <button type="button" class="btn btn-primary" id="restore">Restore</button>
+	    <button type="button" class="btn btn-primary" id="spectrum">Spectrum</button>
+<!--	    <button type="button" class="btn btn-primary" id="print">Print</button>  -->
+	  </p>
+	  <p id="helptext" class="help-block" style="display:none;">Press <strong>Edit</strong> and select a strip around the target spectrum.<br>Press <strong>Crop</strong> to crop image to selection<br>Press <strong>Spectrum</strong> to compute spectrum across cropped image<br>Press <strong>Restore</strong> to start over.</p>
+	</div>
+      </form>
+    </div>
+   
+    <!--<div id="result" class="result container" style="padding: 15px 40px;">-->
+    <div class="row">
+      <div id="result" class="result container col-xs-12 col-sm-6 col-md-8" style="padding: 15px 40px;">
+	<p></p>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div id="content" class="col-xs-12 col-sm-6 col-md-8 container" style="padding: 15px 40px;">
+	<div class="plot-container" style="display:none;">
+	  <div id="specPlot" class="plot-figure"></div>
+	</div>
+      </div>
+    </div>
+
+  </div>  <!-- /container -->
+
+  <div id="push"></div>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted credit">Spectrum app by Michael Gordon, September 2013</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
