@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html manifest="spectrum.manifest">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" > 
+
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <link rel="apple-touch-icon" href="spec_assets/SpectrumIcon.png" />
+
+  <link rel="apple-touch-startup-image" href="spec_assets/SpectrumSplash.png" />
+
+  <link href="spec_assets/css/SpectrumApp.css" rel="stylesheet" type="text/css">
+  <link href="spec_assets/css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+  <link href="spec_assets/css/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" type="text/css">
+  <link href="spec_assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen">
+
+  <script type="text/javascript" src="spec_assets/js/median.js"></script>
+  <script type="text/javascript" src="spec_assets/js/jquery.min.js"></script>
+  <script type="text/javascript" src="spec_assets/js/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="spec_assets/js/load-image.js"></script>
+  <script type="text/javascript" src="spec_assets/js/load-image-ios.js"></script>
+  <script type="text/javascript" src="spec_assets/js/load-image-orientation.js"></script>
+  <script type="text/javascript" src="spec_assets/js/load-image-meta.js"></script>
+  <script type="text/javascript" src="spec_assets/js/load-image-exif.js"></script>
+  <script type="text/javascript" src="spec_assets/js/load-image-exif-map.js"></script>
+  <script type="text/javascript" src="spec_assets/js/jquery.Jcrop.js"></script>
+  <script type="text/javascript" src="spec_assets/js/demo.js"></script>
+  <script type="text/javascript" src="spec_assets/flot/jquery.flot.min.js"></script>
+  <script type="text/javascript" src="spec_assets/flot/jquery.flot.resize.js"></script>
+  <script type="text/javascript" src="spec_assets/flot/jquery.flot.axislabels.js"></script>
+  
+  <script type="text/javascript" src="spec_assets/js/jquery.fancybox.pack.js"></script>    
+  <link rel="stylesheet" type="text/css" href="spec_assets/css/jquery.fancybox.css">
+
+  <script type="text/javascript" src="spec_assets/pixastic/pixastic.custom.js"></script>
+  <script>
+    $(function() {
+    $( "#slider-brightness" ).slider({value:50});
+    });
+  </script>
+<script>
+    $(function() {
+    $( "#slider-contrast" ).slider({value:50});
+    });
+  </script>
+
+
+  <title>SpectrumApp</title>
+
+</head>
+
+<body>
+  <div id="wrap">
+  <div class="container">
+    <div class="jumbotron">
+      <h1>SpectrumApp</h1>
+      <p class="lead">Compute one-dimensional cut across images and display spectrum.</p>
+      </div>
+
+    <div class="row">
+      <form role="form">
+	<div class="form-group col-xs-12 col-sm-6 col-md-8">
+	  <label for="InputFile">Select an image file</label>
+	  <input type="file" id="file-input" style="display:none">
+	  <div class="input-append">
+	    <a class="btn btn-default" onclick="$('input[id=file-input]').click();">File...</a>
+	  </div>
+
+	  <p class="help-block">Or <strong>drag &amp; drop</strong> an image file here.</p>
+	</div>
+      </form>
+    </div>
+    
+    <div class="row">
+      <form role="form">
+	<div class="form-group col-xs-12 col-sm-6 col-md-8">
+	  <p id="actions" style="display:none;">
+	    <button type="button" class="btn btn-primary" id="edit">Edit</button>
+	    <button type="button" class="btn btn-primary" id="crop">Crop</button>
+	    <button type="button" class="btn btn-primary" id="restore">Restore</button>
+	    <button type="button" class="btn btn-primary" id="spectrum">Spectrum</button>
+<!--	    <button type="button" class="btn btn-primary" id="print">Print</button>  -->
+	  </p>
+	  <p id="helptext" class="help-block" style="display:none;">Press <strong>Edit</strong> and select a strip around the target spectrum.<br>Press <strong>Crop</strong> to crop image to selection<br>Press <strong>Spectrum</strong> to compute spectrum across cropped image<br>Press <strong>Restore</strong> to start over.</p>
+
+	  <!-- Pixastic sliders -->
+	  <div id="sliders" style="display:none">
+	    <div>Brightness:</div>
+	    <div id='slider-brightness' class='ui-slider' style="width:150px;margin-top:5px;margin-bottom:5px;">
+	      <div class="ui-slider-handle"></div><div class="ui-slider-range"></div>
+	    </div>	    
+	    <div>Contrast:</div>
+	    <div id='slider-contrast' class='ui-slider' style="width:150px;margin-top:5px;margin-bottom:5px;">
+	      <div class="ui-slider-handle"></div><div class="ui-slider-range"></div>
+	    </div>
+	  </div>
+	</div>
+      </form>
+    </div>
+   
+    <!--<div id="result" class="result container" style="padding: 15px 40px;">-->
+    <div class="row">
+      <div id="result" class="result container col-xs-12 col-sm-6 col-md-8" style="padding: 15px 40px;">
+	<p></p>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div id="content" class="col-xs-12 col-sm-6 col-md-8 container" style="padding: 15px 40px;">
+	<div class="plot-container" style="display:none;">
+	  <div id="specPlot" class="plot-figure"></div>
+	</div>
+      </div>
+    </div>
+
+  </div>  <!-- /container -->
+
+  <div id="push"></div>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted credit">SpectrumApp by Michael Gordon, September 2013 [v1.1]</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

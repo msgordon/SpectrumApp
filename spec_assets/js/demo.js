@@ -34,19 +34,34 @@ $(function () {
             if (img.getContext) {
                 actionsNode.show();
 		$('#helptext').show();
+		$('#sliders').show();
+		
             }
         },
         displayImage = function (file, options) {
             currentFile = file;
-            if (!loadImage(
-                    file,
-                    replaceResults,
-                    options
-                )) {
+	    var img = loadImage(file,replaceResults,options);
+            if (!img) {
                 result.children().replaceWith(
                     $('<span>Your browser does not support the URL or FileReader API.</span>')
                 );
             }
+
+	    //pixastic
+	    //http://www.pixastic.com/lib/docs/
+	    /*
+	    img.onload = function() {
+		var newimg = Pixastic.process(
+		    img,
+		    "brightness",
+		    {
+			brightness:50,
+			contrast:0.5
+		    }
+		);
+	    };
+	    */
+
         },
         displayExifData = function (exif) {
             var thumbnail = exif.get('Thumbnail'),
@@ -299,7 +314,7 @@ $(function () {
 				   xaxis:
 				   {
 				       tickLength:0,
-				       show: true,
+				       show: false,
 				       size: 12,
 				       weight: "bold",
 				       family: "sans-serif",
@@ -316,7 +331,7 @@ $(function () {
 				       weight: "bold",
 				       family: "sans-serif",
 				       variant: "small-caps",
-				       axisLabel: 'Counts',
+				       axisLabel: 'Intensity',
 				       axisLabelFontSizePixels: 12,
 				       color:"rgb(0,0,0)",
 				       //transform:  function(v) {return Math.log(v+0.0001);},
