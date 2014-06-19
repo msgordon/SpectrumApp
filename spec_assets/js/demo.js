@@ -138,8 +138,8 @@ $(function () {
             var target = e.dataTransfer || e.target,
                 file = target && target.files && target.files[0],
                 options = {
-                    //maxWidth: result.width(),
-		    minWidth: 800,
+                    maxWidth: result.width(),
+		    //minWidth: 800,
                     canvas: true
                 };
             if (!file) {
@@ -222,8 +222,8 @@ $(function () {
 	conslide.slider("value",1);
 	if (origImg) {
 	    var options = {
-                //maxWidth: $('#result').width(),
-		minWidth:800,
+                maxWidth: $('#result').width(),
+		//minWidth:800,
                 canvas: true
 	    };
 	    //replaceResults(loadImage(origImg))
