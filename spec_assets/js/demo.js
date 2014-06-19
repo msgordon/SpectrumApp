@@ -17,10 +17,10 @@ $(function () {
     var oPlot;
     var brightslide = $('#slider-brightness');
     var conslide    = $('#slider-contrast');
-    brightslide.on("slide", function(event,ui) {
+    brightslide.on("slidestop", function(event,ui) {
 	updateImage(ui.value,conslide.slider("value"));
     });
-    conslide.on("slide", function(event,ui) {
+    conslide.on("slidestop", function(event,ui) {
 	updateImage(brightslide.slider("value"),ui.value);
     });
     
@@ -63,8 +63,15 @@ $(function () {
 	    if (!document.revertMe) {
 		document.revertMe = img;
 	    }
+	    
 	    else {
-		img = document.revertMe;
+		if ((img.width == document.revertMe.width) &&
+		    (img.height == document.revertMe.height)) {
+		    
+		    img = document.revertMe;
+		}
+		//else size has changed
+		document.revertMe = img;
 	    }
 	    //console.log(b);
 	    //console.log(c);
