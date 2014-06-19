@@ -100,6 +100,13 @@ $(function () {
 	    };
 	    var alt = loadImage(newimg.toDataURL(),replaceResults,options);
 	    //result.children().replaceWith(content);
+	    
+
+	    // if spectrum is present, respec
+	    var plotContainer = document.getElementsByClassName("plot-container")
+	    if (plotContainer[0].style.display === '') {
+		$('#spectrum').trigger('click');
+	    }
 	},
         displayExifData = function (exif) {
             var thumbnail = exif.get('Thumbnail'),
@@ -212,7 +219,7 @@ $(function () {
 	event.preventDefault();
 	var origImg = document.origImg;
 	brightslide.slider("value",0);
-	conslide.slide("value",1);
+	conslide.slider("value",1);
 	if (origImg) {
 	    var options = {
                 //maxWidth: $('#result').width(),
