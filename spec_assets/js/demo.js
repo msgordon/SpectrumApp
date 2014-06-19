@@ -57,13 +57,13 @@ $(function () {
         },
         //pixastic
 	//http://www.pixastic.com/lib/docs/
-        updateImage = function (b,c) {
+        getAtMe = function() {
+	    //if (typeof force === 'undefined') {force = false;}
 	    var img = result.find('img, canvas')[0];
 	    // if first time, save to DOM
 	    if (!document.revertMe) {
 		document.revertMe = img;
 	    }
-	    
 	    else {
 		if ((img.width == document.revertMe.width) &&
 		    (img.height == document.revertMe.height)) {
@@ -73,6 +73,10 @@ $(function () {
 		//else size has changed
 		document.revertMe = img;
 	    }
+	    return img
+	}
+        updateImage = function (b,c) {
+	    var img = getAtMe();
 	    //console.log(b);
 	    //console.log(c);
 	    /*
@@ -127,7 +131,8 @@ $(function () {
             var target = e.dataTransfer || e.target,
                 file = target && target.files && target.files[0],
                 options = {
-                    maxWidth: result.width(),
+                    //maxWidth: result.width(),
+		    minWidth: 800,
                     canvas: true
                 };
             if (!file) {
@@ -154,8 +159,9 @@ $(function () {
     $('#file-input').on('change', dropChangeHandler);
     $('#edit').on('click', function (event) {
         event.preventDefault();
-        var imgNode = result.find('img, canvas'),
-            img = imgNode[0];
+        var imgNode = result.find('img, canvas');
+        //    img = imgNode[0];
+	var img = getAtMe();
 
 	if (img && img instanceof HTMLCanvasElement) {
 	    if (!document.origImg) {
@@ -177,7 +183,8 @@ $(function () {
     });
     $('#crop').on('click', function (event) {
         event.preventDefault();
-        var img = result.find('img, canvas')[0];
+        //var img = result.find('img, canvas')[0];
+	var img = getAtMe();
         if (img && coordinates) {
             replaceResults(loadImage.scale(img, {
                 left: coordinates.x,
