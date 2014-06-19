@@ -90,7 +90,8 @@ $(function () {
 	    //var content = $('<a class="img-responsive" target="_blank">').append(newimg)
 	    newimg.crossOrigin = "Anonymous";
 	    var options = {
-                maxWidth: $('#result').width(),
+                //maxWidth: $('#result').width(),
+		minWidth: 800,
                 canvas: true
 	    };
 	    var alt = loadImage(newimg.toDataURL(),replaceResults,options);
