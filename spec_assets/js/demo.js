@@ -37,10 +37,10 @@ $(function () {
 		$('#sliders').show();
 		var brightslide = $('#slider-brightness');
 		var conslide    = $('#slider-contrast');
-		brightslide.on("slide", function(event,ui) {
+		brightslide.on("slidestop", function(event,ui) {
 		    updateImage(ui.value,conslide.slider("value"));
 		});
-		conslide.on("slide", function(event,ui) {
+		conslide.on("slidestop", function(event,ui) {
 		    updateImage(brightslide.slider("value"),ui.value);
 		});
 
