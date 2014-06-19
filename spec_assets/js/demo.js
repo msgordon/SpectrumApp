@@ -59,6 +59,7 @@ $(function () {
 	//http://www.pixastic.com/lib/docs/
         updateImage = function (b,c) {
 	    var img = result.find('img, canvas')[0];
+	    img = Pixastic.revert(img);
 	    var newimg = Pixastic.process(img, "brightness", 
 					      {
 						  brightness:b,
