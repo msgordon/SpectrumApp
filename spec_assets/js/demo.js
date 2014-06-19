@@ -17,10 +17,10 @@ $(function () {
     var oPlot;
     var brightslide = $('#slider-brightness');
     var conslide    = $('#slider-contrast');
-    brightslide.on("slidestop", function(event,ui) {
+    brightslide.on("slide", function(event,ui) {
 	updateImage(ui.value,conslide.slider("value"));
     });
-    conslide.on("slidestop", function(event,ui) {
+    conslide.on("slide", function(event,ui) {
 	updateImage(brightslide.slider("value"),ui.value);
     });
     
@@ -59,7 +59,22 @@ $(function () {
 	//http://www.pixastic.com/lib/docs/
         updateImage = function (b,c) {
 	    var img = result.find('img, canvas')[0];
-	    img = Pixastic.revert(img);
+	    // if first time, save to DOM
+	    if (!document.revertMe) {
+		document.revertMe = img;
+	    }
+	    else {
+		img = document.revertMe;
+	    }
+	    //console.log(b);
+	    //console.log(c);
+	    /*
+	    img = Pixastic.process(img, "brightness", 
+                                                {
+						    brightness:0,
+						    contrast:1
+						});		
+	    */
 	    var newimg = Pixastic.process(img, "brightness", 
 					      {
 						  brightness:b,
