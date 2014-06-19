@@ -74,7 +74,7 @@ $(function () {
 		document.revertMe = img;
 	    }
 	    return img
-	}
+	},
         updateImage = function (b,c) {
 	    var img = getAtMe();
 	    //console.log(b);
@@ -211,9 +211,12 @@ $(function () {
     $('#restore').on('click',function (event) {
 	event.preventDefault();
 	var origImg = document.origImg;
+	brightslide.slider("value",0);
+	conslide.slide("value",1);
 	if (origImg) {
 	    var options = {
-                maxWidth: $('#result').width(),
+                //maxWidth: $('#result').width(),
+		minWidth:800,
                 canvas: true
 	    };
 	    //replaceResults(loadImage(origImg))
