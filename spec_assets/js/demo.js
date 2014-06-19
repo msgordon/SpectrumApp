@@ -68,6 +68,10 @@ $(function () {
 					      });		
 	    //var content = $('<a class="img-responsive" target="_blank">').append(newimg)
 	    newimg.crossOrigin = "Anonymous";
+	    var options = {
+                maxWidth: $('#result').width(),
+                canvas: true
+	    };
 	    var alt = loadImage(newimg.toDataURL(),replaceResults,options);
 	    //result.children().replaceWith(content);
 	},
