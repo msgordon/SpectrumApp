@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" > 
 
-  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
   <meta name="apple-mobile-web-app-capable" content="yes" />
 
@@ -39,16 +39,27 @@
 
   <script type="text/javascript" src="spec_assets/pixastic/pixastic.custom.js"></script>
   <script type="text/javascript" src="spec_assets/js/jquery.ui.touch-punch.min.js"></script>
-  <script>
+  <script type="text/javascript">
     $(function() {
-    $( "#slider-brightness" ).slider({value:50});
+    var brightslide = $( "#slider-brightness" ).slider(
+                                                       {
+                                                        value:0,
+                                                        min:-150,
+                                                        max:150,
+                                                       });
     });
   </script>
-<script>
+  <script type="text/javascript">
     $(function() {
-    $( "#slider-contrast" ).slider({value:50});
+    var conslide = $( "#slider-contrast" ).slider(
+                                                  {
+                                                   value:1,
+                                                   min:-1,
+                                                   max:3,
+                                                   step:0.1
+                                                  });
     });
-  </script>
+</script>
 
 
   <title>AstroSpec</title>

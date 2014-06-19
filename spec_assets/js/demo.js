@@ -35,34 +35,42 @@ $(function () {
                 actionsNode.show();
 		$('#helptext').show();
 		$('#sliders').show();
+		var brightslide = $('#slider-brightness');
+		var conslide    = $('#slider-contrast');
+		brightslide.on("slide", function(event,ui) {
+		    updateImage(ui.value,conslide.slider("value"));
+		});
+		conslide.on("slide", function(event,ui) {
+		    updateImage(brightslide.slider("value"),ui.value);
+		});
+
 		
             }
         },
         displayImage = function (file, options) {
             currentFile = file;
 	    var img = loadImage(file,replaceResults,options);
+	    img.crossOrigin = "Anonymous";
             if (!img) {
                 result.children().replaceWith(
                     $('<span>Your browser does not support the URL or FileReader API.</span>')
                 );
-            }
-
-	    //pixastic
-	    //http://www.pixastic.com/lib/docs/
-	    /*
-	    img.onload = function() {
-		var newimg = Pixastic.process(
-		    img,
-		    "brightness",
-		    {
-			brightness:50,
-			contrast:0.5
-		    }
-		);
-	    };
-	    */
-
+            }	    
         },
+        //pixastic
+	//http://www.pixastic.com/lib/docs/
+        updateImage = function (b,c) {
+	    var img = result.find('img, canvas')[0];
+	    var newimg = Pixastic.process(img, "brightness", 
+					      {
+						  brightness:b,
+						  contrast:c
+					      });		
+	    //var content = $('<a class="img-responsive" target="_blank">').append(newimg)
+	    newimg.crossOrigin = "Anonymous";
+	    var alt = loadImage(newimg.toDataURL(),replaceResults,options);
+	    //result.children().replaceWith(content);
+	},
         displayExifData = function (exif) {
             var thumbnail = exif.get('Thumbnail'),
                 tags = exif.getAll(),

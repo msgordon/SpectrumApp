@@ -455,7 +455,7 @@ Pixastic.Actions.brightness = {
 		contrast = Math.max(0,contrast+1);
 
 		if (Pixastic.Client.hasCanvasImageData()) {
-			var data = Pixastic.prepareData(params);
+		        var data = Pixastic.prepareData(params);
 			var rect = params.options.rect;
 			var w = rect.width;
 			var h = rect.height;
