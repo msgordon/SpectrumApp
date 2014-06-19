@@ -15,7 +15,15 @@ $(function () {
     'use strict';
 
     var oPlot;
-
+    var brightslide = $('#slider-brightness');
+    var conslide    = $('#slider-contrast');
+    brightslide.on("slidestop", function(event,ui) {
+	updateImage(ui.value,conslide.slider("value"));
+    });
+    conslide.on("slidestop", function(event,ui) {
+	updateImage(brightslide.slider("value"),ui.value);
+    });
+    
     var result = $('#result'),
         exifNode = $('#exif'),
         thumbNode = $('#thumbnail'),
@@ -35,16 +43,6 @@ $(function () {
                 actionsNode.show();
 		$('#helptext').show();
 		$('#sliders').show();
-		var brightslide = $('#slider-brightness');
-		var conslide    = $('#slider-contrast');
-		brightslide.on("slidestop", function(event,ui) {
-		    updateImage(ui.value,conslide.slider("value"));
-		});
-		conslide.on("slidestop", function(event,ui) {
-		    updateImage(brightslide.slider("value"),ui.value);
-		});
-
-		
             }
         },
         displayImage = function (file, options) {
