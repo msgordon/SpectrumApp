@@ -351,6 +351,7 @@ $(function () {
 	    }
 	    oPlot = $.plot("#specPlot",[plotMe],
 			       {
+				   canvas: true,
 				   series:
 				   {
 				       color:"rgb(173,20,38)",
@@ -377,15 +378,15 @@ $(function () {
 				   yaxis:
 				   {
 				       tickLength:0,
-				       show: true,
+				       show: false,
 				       size: 12,
 				       weight: "bold",
 				       family: "sans-serif",
 				       variant: "small-caps",
-				       axisLabel: 'Intensity',
 				       axisLabelFontSizePixels: 12,
 				       color:"rgb(0,0,0)",
 				       //transform:  function(v) {return Math.log(v+0.0001);},
+				       //axisLabel: 'Intensity',
 				   }
 			       }
 			      );

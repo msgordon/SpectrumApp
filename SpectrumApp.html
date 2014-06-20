@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html manifest="spectrum.manifest">
+<!--<html manifest="spectrum.manifest">-->
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" > 
@@ -52,14 +52,28 @@
   <script type="text/javascript">
     $(function() {
     var conslide = $( "#slider-contrast" ).slider(
-                                                  {
+    {
                                                    value:1,
                                                    min:-1,
                                                    max:3,
                                                    step:0.1
                                                   });
     });
+  </script>
+  
+  <!--"https://www.google.com/cloudprint/client/cpgadget.js" -->
+  <script type="text/javascript" src="spec_assets/js/cpgadget.js"></script>
+  <script type="text/javascript" src="spec_assets/js/print.js"></script>
+  <script>
+    window.onload = function() {
+    var gadget = new cloudprint.Gadget();
+    gadget.setPrintButton(
+    cloudprint.Gadget.createDefaultPrintButton("print_button_container")); // div id to contain the button
+    gadget.setPrintDocument("[document mimetype]", "[document title]", "[document content]", "[encoding] (optional)");
+    }
 </script>
+
+
 
 
   <title>AstroSpec</title>
@@ -96,6 +110,7 @@
 	    <button type="button" class="btn btn-primary" id="crop">Crop</button>
 	    <button type="button" class="btn btn-primary" id="restore">Restore</button>
 	    <button type="button" class="btn btn-primary" id="spectrum">Spectrum</button>
+	    <button type="button" class="btn btn-primary" onclick="printDiv('printThis');">TESTTHIS</button>
 <!--	    <button type="button" class="btn btn-primary" id="print">Print</button>  -->
 	  </p>
 	  <p id="helptext" class="help-block" style="display:none;">Press <strong>Edit</strong> and select a strip around the target spectrum.<br>Press <strong>Crop</strong> to crop image to selection<br>Press <strong>Spectrum</strong> to compute spectrum across cropped image<br>Press <strong>Restore</strong> to start over.</p>
@@ -117,18 +132,24 @@
     </div>
    
     <!--<div id="result" class="result container" style="padding: 15px 40px;">-->
-    <div class="row">
-      <div id="result" class="result container col-xs-12 col-sm-6 col-md-8" style="padding: 15px 40px;">
-	<p></p>
-      </div>
-    </div>
-    
-    <div class="row">
-      <div id="content" class="col-xs-12 col-sm-6 col-md-8 container" style="padding: 15px 40px;">
-	<div class="plot-container" style="display:none;">
-	  <div id="specPlot" class="plot-figure"></div>
+    <div id="printThis" class="printDiv">
+      <div class="row">
+	<div id="result" class="result container col-xs-12 col-sm-6 col-md-8" style="padding: 15px 40px;">
+	  <p></p>
 	</div>
       </div>
+      
+      <div class="row">
+	<div id="content" class="col-xs-12 col-sm-6 col-md-8 container" style="padding: 15px 40px;">
+	  <div class="plot-container" style="display:none;">
+	    <div id="specPlot" class="plot-figure"></div>
+	  </div>
+	</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div id="print_button_container"></div>
     </div>
 
   </div>  <!-- /container -->
@@ -137,7 +158,7 @@
   <div id="footer">
     <div class="container">
       <p class="text-muted credit">SpectrumApp by Michael Gordon, 
-September 2013  [v1.4.2]</p>
+September 2013  [v1.4.3]</p>
     </div>
   </div>
 

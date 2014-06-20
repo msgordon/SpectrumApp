@@ -1,10 +1,12 @@
 CACHE MANIFEST
-#  v1.4.2
+#  v1.4.3
 
 CACHE:
 spectrum.manifest
 SpectrumApp.html
 
+spec_assets/js/cpgadget.js
+spec_assets/js/print.js
 spec_assets/pixastic/pixastic.custom.js
 spec_assets/flot/jquery.flot.canvas.js
 spec_assets/flot/jquery.flot.resize.min.js
