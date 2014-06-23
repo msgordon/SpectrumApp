@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<!--<html manifest="spectrum.manifest">-->
+<html manifest="spectrum.manifest">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" > 
@@ -63,17 +63,34 @@
   
   <!--"https://www.google.com/cloudprint/client/cpgadget.js" -->
   <script type="text/javascript" src="spec_assets/js/cpgadget.js"></script>
-  <script type="text/javascript" src="spec_assets/js/print.js"></script>
-  <script>
-    window.onload = function() {
-    var gadget = new cloudprint.Gadget();
-    gadget.setPrintButton(
-    cloudprint.Gadget.createDefaultPrintButton("print_button_container")); // div id to contain the button
-    gadget.setPrintDocument("[document mimetype]", "[document title]", "[document content]", "[encoding] (optional)");
+  <script type="text/javascript">
+    function setupFunc() {
+        function setupPrint() {
+        //var gadget = new cloudprint.Gadget();
+        //    gadget.setPrintButton(document.getElementById("printButton"));
+    
+//            cloudprint.Gadget.createDefaultPrintButton("print_button_container")); // div id to contain the button
+        //};
+        //function printDiv() {
+            var img = $('#result').find('img, canvas')[0];
+            var imga = $('#specPlot').find('img, canvas')[0];
+           // console.log("meep");
+            var w = window.open();
+            w.document.write("<!DOCTYPE HTML>");
+            w.document.write('<img src="' + img.toDataURL() + '"/><br>');
+            w.document.write('<img src="' + imga.toDataURL() + '"/><br>');
+      //      var toPrint = URL.createObjectURL(w);
+    //console.log(toPrint);
+            //gadget.setPrintDocument("[document mimetype]", "[document title]", "[document content]", "[encoding] (optional)");
+           //gadget.setPrintDocument("dataURL", "TESTDOC", w);
+           //gadget.openPrintDialog();
+            w.print();
+            w.close();
+        };
+        document.getElementById('printButton').addEventListener("click",setupPrint);
     }
-</script>
-
-
+    window.onload = setupFunc;
+  </script>
 
 
   <title>AstroSpec</title>
@@ -110,7 +127,7 @@
 	    <button type="button" class="btn btn-primary" id="crop">Crop</button>
 	    <button type="button" class="btn btn-primary" id="restore">Restore</button>
 	    <button type="button" class="btn btn-primary" id="spectrum">Spectrum</button>
-	    <button type="button" class="btn btn-primary" onclick="printDiv('printThis');">TESTTHIS</button>
+	    <button type="button" class="btn btn-primary" id="printButton">Print</button>
 <!--	    <button type="button" class="btn btn-primary" id="print">Print</button>  -->
 	  </p>
 	  <p id="helptext" class="help-block" style="display:none;">Press <strong>Edit</strong> and select a strip around the target spectrum.<br>Press <strong>Crop</strong> to crop image to selection<br>Press <strong>Spectrum</strong> to compute spectrum across cropped image<br>Press <strong>Restore</strong> to start over.</p>
@@ -148,9 +165,9 @@
       </div>
     </div>
 
-    <div class="row">
+    <!--<div class="row">
       <div id="print_button_container"></div>
-    </div>
+    </div> -->
 
   </div>  <!-- /container -->
 
@@ -158,7 +175,7 @@
   <div id="footer">
     <div class="container">
       <p class="text-muted credit">SpectrumApp by Michael Gordon, 
-September 2013  [v1.4.3]</p>
+September 2013  [v1.4.5]</p>
     </div>
   </div>
 
