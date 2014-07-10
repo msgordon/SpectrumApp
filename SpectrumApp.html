@@ -60,38 +60,41 @@
                                                   });
     });
   </script>
-  
+
+<!--flip-->
+<script type="text/javascript">
+$("#flip").on('click', function (event) {
+   event.preventDefault();
+   var imgNode = result.find('img, canvas');
+   Pixastic.process(img, "fliph");
+});
+ </script>
   <!--"https://www.google.com/cloudprint/client/cpgadget.js" -->
-  <script type="text/javascript" src="spec_assets/js/cpgadget.js"></script>
-  <script type="text/javascript">
-    function setupFunc() {
-        function setupPrint() {
-        //var gadget = new cloudprint.Gadget();
-        //    gadget.setPrintButton(document.getElementById("printButton"));
+  <!--<script type="text/javascript" src="spec_assets/js/cpgadget.js"></script> -->
+  <!--<script type="text/javascript" src="spec_assets/js/printit.js"></script>-->
+
+<!--
+  <script>
+    window.onload = function() {
+    $( "#dialog" ).dialog({ autoOpen: false,
+                            modal:true});
+    $( "#opener" ).click(function() {
+    $( "#dialog" ).dialog( "open" );
+    });
     
-//            cloudprint.Gadget.createDefaultPrintButton("print_button_container")); // div id to contain the button
-        //};
-        //function printDiv() {
-            var img = $('#result').find('img, canvas')[0];
-            var imga = $('#specPlot').find('img, canvas')[0];
-           // console.log("meep");
-            var w = window.open();
-            w.document.write("<!DOCTYPE HTML>");
+    $("#dialog").on("dialogopen",function(event,ui){
+    var img = $('#result').find('img, canvas')[0];
+    var imga = $('#specPlot').find('img, canvas')[0];
+    $("#dialog").innerHTML='<img src="' + img.toDataURL() + '"/><br><img src="' + imga.toDataURL() + '"/><br>
             w.document.write('<img src="' + img.toDataURL() + '"/><br>');
             w.document.write('<img src="' + imga.toDataURL() + '"/><br>');
-      //      var toPrint = URL.createObjectURL(w);
-    //console.log(toPrint);
-            //gadget.setPrintDocument("[document mimetype]", "[document title]", "[document content]", "[encoding] (optional)");
-           //gadget.setPrintDocument("dataURL", "TESTDOC", w);
-           //gadget.openPrintDialog();
-            w.print();
-            w.close();
-        };
-        document.getElementById('printButton').addEventListener("click",setupPrint);
+            w.document.write('<button type="button" onclick="close()",class="btn btn-primary" id="return">Return</button>');
     }
-    window.onload = setupFunc;
-  </script>
+    );
 
+};
+  </script>
+-->
 
   <title>AstroSpec</title>
 
@@ -125,12 +128,14 @@
 	  <p id="actions" style="display:none;">
 	    <button type="button" class="btn btn-primary" id="edit">Edit</button>
 	    <button type="button" class="btn btn-primary" id="crop">Crop</button>
+	    <button type="button" class="btn btn-primary" id="flip">Flip</button>
 	    <button type="button" class="btn btn-primary" id="restore">Restore</button>
 	    <button type="button" class="btn btn-primary" id="spectrum">Spectrum</button>
-	    <button type="button" class="btn btn-primary" id="printButton">Print</button>
+<!--	    <button type="button" class="btn btn-primary" id="opener">Print</button> -->
+	    
 <!--	    <button type="button" class="btn btn-primary" id="print">Print</button>  -->
 	  </p>
-	  <p id="helptext" class="help-block" style="display:none;">Press <strong>Edit</strong> and select a strip around the target spectrum.<br>Press <strong>Crop</strong> to crop image to selection<br>Press <strong>Spectrum</strong> to compute spectrum across cropped image<br>Press <strong>Restore</strong> to start over.</p>
+	  <p id="helptext" class="help-block" style="display:none;">Press <strong>Edit</strong> and select a strip around the target spectrum.<br>Press <strong>Crop</strong> to crop image to selection<br>Press <strong>Flip</strong> to mirror the image<br>Press <strong>Spectrum</strong> to compute spectrum across cropped image<br>Press <strong>Restore</strong> to start over.</p>
 
 	  <!-- Pixastic sliders -->
 	  <div id="sliders" style="display:none">
@@ -165,6 +170,8 @@
       </div>
     </div>
 
+    <!--  Print dialog window -->
+    <div id="dialog" class="ui-dialog" title="Print spectra"></div>
     <!--<div class="row">
       <div id="print_button_container"></div>
     </div> -->
@@ -175,7 +182,7 @@
   <div id="footer">
     <div class="container">
       <p class="text-muted credit">SpectrumApp by Michael Gordon, 
-September 2013  [v1.4.5]</p>
+September 2013  [v1.6.1]</p>
     </div>
   </div>
 

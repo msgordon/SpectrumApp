@@ -154,6 +154,10 @@ $(function () {
                 }
                 displayImage(file, options);
             });
+	    var plotContainer = document.getElementsByClassName("plot-container")
+	    if (plotContainer) {
+		plotContainer[0].style.display ='none';
+	    }
         },
         coordinates;
     $(document)
