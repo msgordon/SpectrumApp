@@ -61,13 +61,17 @@
     });
   </script>
 
-<!--flip-->
+<!--flip
 <script type="text/javascript">
-$("#flip").on('click', function (event) {
+$('#flip').on('click', function (event) {
    event.preventDefault();
-   var imgNode = result.find('img, canvas');
+   var result = $('#result');
+   var img = result.find('img, canvas')[0];
+
    Pixastic.process(img, "fliph");
 });
+-->
+
  </script>
   <!--"https://www.google.com/cloudprint/client/cpgadget.js" -->
   <!--<script type="text/javascript" src="spec_assets/js/cpgadget.js"></script> -->
@@ -128,7 +132,7 @@ $("#flip").on('click', function (event) {
 	  <p id="actions" style="display:none;">
 	    <button type="button" class="btn btn-primary" id="edit">Edit</button>
 	    <button type="button" class="btn btn-primary" id="crop">Crop</button>
-	    <button type="button" class="btn btn-primary" id="flip">Flip</button>
+<!--	    <button type="button" class="btn btn-primary" id="flip">Flip</button>-->
 	    <button type="button" class="btn btn-primary" id="restore">Restore</button>
 	    <button type="button" class="btn btn-primary" id="spectrum">Spectrum</button>
 <!--	    <button type="button" class="btn btn-primary" id="opener">Print</button> -->
@@ -182,7 +186,7 @@ $("#flip").on('click', function (event) {
   <div id="footer">
     <div class="container">
       <p class="text-muted credit">SpectrumApp by Michael Gordon, 
-September 2013  [v1.6.1]</p>
+September 2013  [v1.6.3]</p>
     </div>
   </div>
 

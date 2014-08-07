@@ -219,6 +219,22 @@ $(function () {
 	    }
         }
     });
+
+    $('#flip').on('click',function (event) {
+	event.preventDefault();
+	var img = result.find('img, canvas');
+	//var copyCanvas = document.createElement("canvas");
+
+	var dataURL = img[0].toDataURL();
+
+	var ctx = img[0].getContext("2d");
+	//copyCanvas.drawImage(ctx,0,0);
+	ctx.clearRect(0,0,img[0].width,img[0].width);//img.left,img.top,img.width,img.height);
+	ctx.scale(-1,1);
+	ctx.drawImage(dataURL,0,0);
+	//ctx.drawImage(copyCanvas,0,0);//-img.left-img.width,img.top,img.width,img.height);
+	
+    });
     $('#restore').on('click',function (event) {
 	event.preventDefault();
 	var origImg = document.origImg;
