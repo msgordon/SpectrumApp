@@ -39,6 +39,7 @@
 
   <script type="text/javascript" src="spec_assets/pixastic/pixastic.custom.js"></script>
   <script type="text/javascript" src="spec_assets/js/jquery.ui.touch-punch.min.js"></script>
+  <script type="text/javascript" src="spec_assets/js/FileSaver.js"></script>
 
   <script type="text/javascript">
     $(function() {
@@ -62,6 +63,27 @@
     });
   </script>
 
+  <script type="text/javascript">
+    function saveMe()
+    {
+        // get value
+        var selected = document.getElementById("lampselect");
+        var selectedValue = selected.options[selected.selectedIndex].value;
+        console.log(selectedValue);
+        var img = $('#result').find('img, canvas')[0];
+        var imga = $('#specPlot').find('img, canvas')[0];
+        var fileParts = ['<h1>'+selectedValue+'</h1><br><img src="' + img.toDataURL() + '"/></br><img src="' + imga.toDataURL() + '"/></br>']
+
+        //var screenshot = document.documentElement.cloneNode(true);
+        //screenshot.write('<img src="' + img.toDataURL() + '"/></br>');
+        //screenshot.write('<img src="' + imga.toDataURL() + '"/></br>');
+        var blob = new Blob(fileParts, {
+         type: 'text/html'
+        });
+        saveAs(blob, "test.html");
+    };
+  </script>
+
 <!--flip
 <script type="text/javascript">
 $('#flip').on('click', function (event) {
@@ -71,9 +93,8 @@ $('#flip').on('click', function (event) {
 
    Pixastic.process(img, "fliph");
 });
--->
 
- </script>
+ </script>-->
   <!--"https://www.google.com/cloudprint/client/cpgadget.js" -->
   <!--<script type="text/javascript" src="spec_assets/js/cpgadget.js"></script> -->
   <!--<script type="text/javascript" src="spec_assets/js/printit.js"></script>-->
@@ -119,7 +140,7 @@ $('#flip').on('click', function (event) {
 	  <label for="InputFile">Select an image file</label>
 	  <input type="file" id="file-input" style="display:none">
 	  <div class="input-append">
-	    <button type="button" class="btn-lg btn-default" onclick="$('input[id=file-input]').click();">File...</a>
+	    <button type="button" class="btn-lg btn-default" onclick="$('input[id=file-input]').click();">File...</button>
 	  </div>
 
 	  <p class="help-block">Or <strong>drag &amp; drop</strong> an image file here.</p>
@@ -134,8 +155,8 @@ $('#flip').on('click', function (event) {
 	    <button type="button" class="btn-lg btn-primary" id="edit">Edit</button>
 	    <button type="button" class="btn-lg btn-primary" id="crop">Crop</button>
 <!--	    <button type="button" class="btn btn-primary" id="flip">Flip</button>-->
-	    <button type="button" class="btn-lg btn-primary" id="restore">Restore</button>
-	    <button type="button" class="btn-lg btn-primary" id="spectrum">Spectrum</button>
+	    <button type="button" class="btn-lg btn-danger" id="restore">Restore</button>
+	    <button type="button" class="btn-lg btn-info" id="spectrum">Spectrum</button>
 <!--	    <button type="button" class="btn btn-primary" id="opener">Print</button> -->
 	    
 <!--	    <button type="button" class="btn btn-primary" id="print">Print</button>  -->
@@ -164,12 +185,12 @@ $('#flip').on('click', function (event) {
 		<option>1</option>
 	      </select>
 	      <div id="lamplab" style="display:none">
-		<p><br><br>Lamp #<br></p>
+		<p><br><br>&nbsp;&nbsp;Lamp #<br></p>
 		<!--<p>Lamp #<br></p><p><br></p>-->
 		<form class="form-inline" role="form">
 		  <div class="form-group col-xs-4 col-sm-4 col-md-4">
 		    <label class="sr-only" for="lamplab">Lamp #</label>
-		    <select class="form-control input-lg">
+		    <select class="form-control input-lg" id="lampselect">
 		      <option>1</option>
 		      <option>2</option>
 		      <option>3</option>
@@ -181,7 +202,7 @@ $('#flip').on('click', function (event) {
 		  </div>
 		  <div class="form-group col-xs-2 col-sm-2 col-md-2">
 		    <!--<div class="col-xs-2 col-sm-2 col-md-2">-->
-		    <button type="button" class="btn-lg btn-success" id="save" onclick="generate()">Save</button>
+		    <button type="button" class="btn-lg btn-success" id="saveThis" onclick="saveMe()">Save</button>
 		  </div>
 		</form>
 	      </div>
@@ -210,7 +231,7 @@ $('#flip').on('click', function (event) {
     </div>
 
     <!--  Print dialog window -->
-    <div id="dialog" class="ui-dialog" title="Print spectra"></div>
+    <!--<div id="dialog" class="ui-dialog" title="Print spectra"></div>-->
     <!--<div class="row">
       <div id="print_button_container"></div>
     </div> -->
@@ -221,7 +242,7 @@ $('#flip').on('click', function (event) {
   <div id="footer">
     <div class="container">
       <p class="text-muted credit">SpectrumApp by Michael Gordon, 
-September 2013  [v1.7.5.4]</p>
+September 2013  [v1.7.5.6]</p>
     </div>
   </div>
 
