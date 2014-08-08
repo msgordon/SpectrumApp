@@ -139,18 +139,43 @@ $('#flip').on('click', function (event) {
 	    
 <!--	    <button type="button" class="btn btn-primary" id="print">Print</button>  -->
 	  </p>
-	  <p id="helptext" class="help-block" style="display:none;">Press <strong>Edit</strong> and select a strip around the target spectrum.<br>Press <strong>Crop</strong> to crop image to selection<br>Press <strong>Flip</strong> to mirror the image<br>Press <strong>Spectrum</strong> to compute spectrum across cropped image<br>Press <strong>Restore</strong> to start over.</p>
+	  <p id="helptext" class="help-block" style="display:none;">Press <strong>Edit</strong> and select a strip around the target spectrum.<br>Press <strong>Crop</strong> to crop image to selection<br>>Press <strong>Spectrum</strong> to compute spectrum across cropped image<br>Press <strong>Restore</strong> to start over.</p>
 
 	  <!-- Pixastic sliders -->
-	  <div id="sliders" style="display:none">
-	    <div>Brightness:</div>
-	    <div id='slider-brightness' class='ui-slider' style="width:300px;margin-top:5px;margin-bottom:5px;">
-	      <div class="ui-slider-handle" style="height:2.4em;width:2.4em;"></div><div class="ui-slider-range"></div>
-	    </div>	    
-	    <br>
-	    <div>Contrast:</div>
-	    <div id='slider-contrast' class='ui-slider' style="width:300px;margin-top:5px;margin-bottom:5px;">
-	      <div class="ui-slider-handle" style="height:2.4em;width:2.4em;"></div><div class="ui-slider-range"></div>
+	  <div class="row">
+	    <div id="sliders" style="display:none">
+	      <div class="col-xs-12 col-sm-6 col-md-8">
+		<div>Brightness:</div>
+		<div id='slider-brightness' class='ui-slider' style="width:300px;margin-top:5px;margin-bottom:5px;">
+		  <div class="ui-slider-handle" style="height:2.4em;width:2.4em;"></div><div class="ui-slider-range">
+		  </div>
+		</div>
+		<br>
+		<div>Contrast:</div>
+		<div id='slider-contrast' class='ui-slider' style="width:300px;margin-top:5px;margin-bottom:5px;">
+		  <div class="ui-slider-handle" style="height:2.4em;width:2.4em;"></div><div class="ui-slider-range">
+		  </div>
+		</div>
+	      </div>
+	    </div>
+	    <div class="col-xs-2">
+	      <select class="form-control input-lg" style="display:none">
+		<option>1</option>
+	      </select>
+	      <div id="lamplab" style="display:none">
+		<p><br><br>Lamp #<br></p>
+		<!--<p>Lamp #<br></p><p><br></p>-->
+		<select class="form-control input-lg">
+		  <option>1</option>
+		  <option>2</option>
+		  <option>3</option>
+		  <option>4</option>
+		  <option>5</option>
+		  <option>6</option>
+		  <option>7</option>
+		</select>
+	      </div>
+	      
 	    </div>
 	  </div>
 	</div>
@@ -186,7 +211,7 @@ $('#flip').on('click', function (event) {
   <div id="footer">
     <div class="container">
       <p class="text-muted credit">SpectrumApp by Michael Gordon, 
-September 2013  [v1.6.3]</p>
+September 2013  [v1.7.0]</p>
     </div>
   </div>
 

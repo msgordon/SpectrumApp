@@ -43,6 +43,7 @@ $(function () {
                 actionsNode.show();
 		$('#helptext').show();
 		$('#sliders').show();
+		$('#lamplab').show()
             }
         },
         displayImage = function (file, options) {
