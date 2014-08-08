@@ -44,6 +44,7 @@ $(function () {
 		$('#helptext').show();
 		$('#sliders').show();
 		$('#lamplab').show()
+		//$('#save').show()
             }
         },
         displayImage = function (file, options) {

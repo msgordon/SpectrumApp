@@ -39,6 +39,7 @@
 
   <script type="text/javascript" src="spec_assets/pixastic/pixastic.custom.js"></script>
   <script type="text/javascript" src="spec_assets/js/jquery.ui.touch-punch.min.js"></script>
+
   <script type="text/javascript">
     $(function() {
     var brightslide = $( "#slider-brightness" ).slider(
@@ -118,7 +119,7 @@ $('#flip').on('click', function (event) {
 	  <label for="InputFile">Select an image file</label>
 	  <input type="file" id="file-input" style="display:none">
 	  <div class="input-append">
-	    <a class="btn btn-default" onclick="$('input[id=file-input]').click();">File...</a>
+	    <button type="button" class="btn-lg btn-default" onclick="$('input[id=file-input]').click();">File...</a>
 	  </div>
 
 	  <p class="help-block">Or <strong>drag &amp; drop</strong> an image file here.</p>
@@ -130,21 +131,21 @@ $('#flip').on('click', function (event) {
       <form role="form">
 	<div class="form-group col-xs-12 col-sm-6 col-md-8">
 	  <p id="actions" style="display:none;">
-	    <button type="button" class="btn btn-primary" id="edit">Edit</button>
-	    <button type="button" class="btn btn-primary" id="crop">Crop</button>
+	    <button type="button" class="btn-lg btn-primary" id="edit">Edit</button>
+	    <button type="button" class="btn-lg btn-primary" id="crop">Crop</button>
 <!--	    <button type="button" class="btn btn-primary" id="flip">Flip</button>-->
-	    <button type="button" class="btn btn-primary" id="restore">Restore</button>
-	    <button type="button" class="btn btn-primary" id="spectrum">Spectrum</button>
+	    <button type="button" class="btn-lg btn-primary" id="restore">Restore</button>
+	    <button type="button" class="btn-lg btn-primary" id="spectrum">Spectrum</button>
 <!--	    <button type="button" class="btn btn-primary" id="opener">Print</button> -->
 	    
 <!--	    <button type="button" class="btn btn-primary" id="print">Print</button>  -->
 	  </p>
-	  <p id="helptext" class="help-block" style="display:none;">Press <strong>Edit</strong> and select a strip around the target spectrum.<br>Press <strong>Crop</strong> to crop image to selection<br>>Press <strong>Spectrum</strong> to compute spectrum across cropped image<br>Press <strong>Restore</strong> to start over.</p>
+	  <p id="helptext" class="help-block" style="display:none;">Press <strong>Edit</strong> and select a strip around the target spectrum.<br>Press <strong>Crop</strong> to crop image to selection<br>Press <strong>Spectrum</strong> to compute spectrum across cropped image<br>Press <strong>Restore</strong> to start over.</p>
 
 	  <!-- Pixastic sliders -->
 	  <div class="row">
 	    <div id="sliders" style="display:none">
-	      <div class="col-xs-12 col-sm-6 col-md-8">
+	      <div class="col-xs-6 col-sm-6 col-md-6">
 		<div>Brightness:</div>
 		<div id='slider-brightness' class='ui-slider' style="width:300px;margin-top:5px;margin-bottom:5px;">
 		  <div class="ui-slider-handle" style="height:2.4em;width:2.4em;"></div><div class="ui-slider-range">
@@ -158,22 +159,31 @@ $('#flip').on('click', function (event) {
 		</div>
 	      </div>
 	    </div>
-	    <div class="col-xs-2">
+	    <div class="col-xs-6 col-sm-6 col-md-6">
 	      <select class="form-control input-lg" style="display:none">
 		<option>1</option>
 	      </select>
 	      <div id="lamplab" style="display:none">
 		<p><br><br>Lamp #<br></p>
 		<!--<p>Lamp #<br></p><p><br></p>-->
-		<select class="form-control input-lg">
-		  <option>1</option>
-		  <option>2</option>
-		  <option>3</option>
-		  <option>4</option>
-		  <option>5</option>
-		  <option>6</option>
-		  <option>7</option>
-		</select>
+		<form class="form-inline" role="form">
+		  <div class="form-group col-xs-4 col-sm-4 col-md-4">
+		    <label class="sr-only" for="lamplab">Lamp #</label>
+		    <select class="form-control input-lg">
+		      <option>1</option>
+		      <option>2</option>
+		      <option>3</option>
+		      <option>4</option>
+		      <option>5</option>
+		      <option>6</option>
+		      <option>7</option>
+		    </select>
+		  </div>
+		  <div class="form-group col-xs-2 col-sm-2 col-md-2">
+		    <!--<div class="col-xs-2 col-sm-2 col-md-2">-->
+		    <button type="button" class="btn-lg btn-success" id="save" onclick="generate()">Save</button>
+		  </div>
+		</form>
 	      </div>
 	      
 	    </div>
@@ -211,7 +221,7 @@ $('#flip').on('click', function (event) {
   <div id="footer">
     <div class="container">
       <p class="text-muted credit">SpectrumApp by Michael Gordon, 
-September 2013  [v1.7.0]</p>
+September 2013  [v1.7.5.4]</p>
     </div>
   </div>
 
