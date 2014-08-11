@@ -55,7 +55,8 @@ $(function () {
                 result.children().replaceWith(
                     $('<span>Your browser does not support the URL or FileReader API.</span>')
                 );
-            }	    
+            }
+	    document.origImg = img;
         },
         //pixastic
 	//http://www.pixastic.com/lib/docs/
@@ -75,7 +76,7 @@ $(function () {
 		//else size has changed
 		document.revertMe = img;
 	    }
-	    return img
+	    return img;
 	},
         updateImage = function (b,c) {
 	    var img = getAtMe();
@@ -154,7 +155,7 @@ $(function () {
                     options.orientation = data.exif.get('Orientation');
                     displayExifData(data.exif);
                 }
-                displayImage(file, options);
+                return displayImage(file, options);
             });
 	    var plotContainer = document.getElementsByClassName("plot-container")
 	    if (plotContainer) {

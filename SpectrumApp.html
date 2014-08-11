@@ -88,6 +88,8 @@
         canvas.width=800;
         canvas.height=800;
     var context = canvas.getContext('2d');
+    context.fillStyle = '#FFFFFF';
+    context.fillRect(0,0,800,800);
 
     var imgLoad = imagesLoaded([img,imga,numIMG]);
     imgLoad.on('done', function(instance) {
@@ -99,8 +101,9 @@
        //var render = canvas.toBlob(function(blob) {
        //saveAs(blob,"raster.png");
        //});
-    var download = canvas.toDataURL("image/jpg")//.replace("image/jpg", "image/octet-stream"); //Convert image to 'octet-stream' (Just a download, really)
+    var download = canvas.toDataURL("image/jpg")//.replace("image/png", "image/octet-stream"); //Convert image to 'octet-stream' (Just a download, really)
     window.location.href = download;
+    //window.open(download);
 
     });
 
