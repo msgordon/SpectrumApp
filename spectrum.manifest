@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# v1.7.5.6
+#  v1.8.0 
 
 CACHE:
 spectrum.manifest
@@ -164,7 +164,17 @@ spec_assets/js/load-image-orientation.js
 spec_assets/js/load-image-meta.js
 spec_assets/js/jquery.ui.touch-punch.min.js
 spec_assets/js/FileSaver.js
-
+spec_assets/js/html2canvas.js
+spec_assets/js/rasterizeHTML.allinone.js
+spec_assets/js/canvas-toBlob.js
+spec_assets/js/imagesloaded.pkgd.js
+spec_assets/numbers/1.png
+spec_assets/numbers/2.png
+spec_assets/numbers/3.png
+spec_assets/numbers/4.png
+spec_assets/numbers/5.png
+spec_assets/numbers/6.png
+spec_assets/numbers/7.png
 
 spec_assets/SpectrumIcon.png
 README.md

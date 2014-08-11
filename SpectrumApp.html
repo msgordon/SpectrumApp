@@ -4,9 +4,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" > 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta name="viewport" content="width=device-width, minimal-ui. initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="no" />
 
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
@@ -40,6 +40,10 @@
   <script type="text/javascript" src="spec_assets/pixastic/pixastic.custom.js"></script>
   <script type="text/javascript" src="spec_assets/js/jquery.ui.touch-punch.min.js"></script>
   <script type="text/javascript" src="spec_assets/js/FileSaver.js"></script>
+  <script type="text/javascript" src="spec_assets/js/html2canvas.js"></script>
+  <script type="text/javascript" src="spec_assets/js/rasterizeHTML.allinone.js"></script>
+  <script type="text/javascript" src="spec_assets/js/canvas-toBlob.js"></script>
+  <script type="text/javascript" src="spec_assets/js/imagesloaded.pkgd.js"></script>
 
   <script type="text/javascript">
     $(function() {
@@ -68,19 +72,90 @@
     {
         // get value
         var selected = document.getElementById("lampselect");
+        var numIMG = document.createElement("img");
         var selectedValue = selected.options[selected.selectedIndex].value;
-        console.log(selectedValue);
+        numIMG.src = 'spec_assets/numbers/' + selectedValue + '.png'
+        console.log(numIMG.src);
         var img = $('#result').find('img, canvas')[0];
         var imga = $('#specPlot').find('img, canvas')[0];
-        var fileParts = ['<h1>'+selectedValue+'</h1><br><img src="' + img.toDataURL() + '"/></br><img src="' + imga.toDataURL() + '"/></br>']
+        //var fileParts = ['<div class="container"><h1>'+selectedValue+'</h1><br><img src="' + img.toDataURL() + '"/><br><img src="' + imga.toDataURL() + '"/><br></div>'];
+    //var fileParts = [img];
+    var fileParts = ['<h1>'+selectedValue+'</h1>'];
+
+    var y = img.height + imga.height;
+
+    var canvas = document.createElement("canvas");
+        canvas.width=800;
+        canvas.height=800;
+    var context = canvas.getContext('2d');
+
+    var imgLoad = imagesLoaded([img,imga,numIMG]);
+    imgLoad.on('done', function(instance) {
+       console.log('DONE  - all images have been successfully loaded');
+       context.drawImage(img,0,0);
+       context.drawImage(imga,0,img.height);
+       context.drawImage(numIMG,395,y);
+       //console.log(canvas.toDataURL());
+       //var render = canvas.toBlob(function(blob) {
+       //saveAs(blob,"raster.png");
+       //});
+    var download = canvas.toDataURL("image/jpg")//.replace("image/jpg", "image/octet-stream"); //Convert image to 'octet-stream' (Just a download, really)
+    window.location.href = download;
+
+    });
+
+    imgLoad.on( 'fail', function( instance ) {
+        console.log('FAIL - all images loaded, at least one is broken');
+        return;
+    });
+
+
+    //console.log(y);
+    //var raster = rasterizeHTML.drawHTML(fileParts[0]).then(function (renderResult) {
+    //    context.drawImage(renderResult.image,0,y);
+    //});
+
+    //numIMG.onload = function(){
+    //context.drawImage(numIMG,0,y);
+    //};
+
+    //console.log(canvas.toDataURL());
+    //saveAs(canvas.toDataURL(),'thing.png');
+
+    //var raster = rasterizeHTML.drawHTML(fileParts[0],canvas).then(function (renderResult) {
+    //context.drawImage(renderResult.image, 0, 0);
+    //console.log(renderResult.image);
+    //console.log(renderResult.image.toDataURL());
+    //console.log(renderResult.error);
+    //});
+
+   //console.log(canvas);
+
+    //var render = canvas.toBlob(function(blob) {
+    //saveAs(blob,"raster.png");
+    //});
+    //console.log(render);
+
+    //console.log(raster.error);
+    //var blob = new Blob([render],{
+    //type: 'image/png'
+    //});
+
+    //    var blob = canvas.toBlob()
+    //saveAs(blob,"raster.png");
 
         //var screenshot = document.documentElement.cloneNode(true);
         //screenshot.write('<img src="' + img.toDataURL() + '"/></br>');
         //screenshot.write('<img src="' + imga.toDataURL() + '"/></br>');
-        var blob = new Blob(fileParts, {
-         type: 'text/html'
-        });
-        saveAs(blob, "test.html");
+        
+       //var blob = new Blob(fileParts, {
+       //  type: 'text/html'
+       // }); 
+    //var cvs = window.html2canvas(blob, {
+    //    allowTaint:true
+    //    });
+
+    //saveAs(blob, "test.html");
     };
   </script>
 
@@ -242,7 +317,7 @@ $('#flip').on('click', function (event) {
   <div id="footer">
     <div class="container">
       <p class="text-muted credit">SpectrumApp by Michael Gordon, 
-September 2013  [v1.7.5.6]</p>
+September 2013  [v1.8.0]</p>
     </div>
   </div>
 
